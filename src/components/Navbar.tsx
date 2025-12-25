@@ -4,13 +4,17 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Music } from "lucide-react";
+import Image from "next/image";
 import { Button } from "./ui/button";
 import { cn } from "./ui/button"; // Re-using cn utility
 import { ThemeToggle } from "./ThemeToggle";
+import { LanguageToggle } from "./LanguageToggle";
+import { useLanguage } from "@/context/language-context";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,10 +25,11 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Community", href: "#community" },
-    { name: "Learn", href: "#learn" },
-    { name: "Events", href: "#events" },
+    { name: t.navbar.home, href: "/" },
+    { name: t.navbar.shop, href: "/shop" },
+    { name: t.navbar.community, href: "/#community" },
+    { name: t.navbar.learn, href: "/#learn" },
+    { name: t.navbar.events, href: "/#events" },
   ];
 
   return (
@@ -39,11 +44,16 @@ export function Navbar() {
       <div className="container mx-auto px-4 md:px-6">
         <nav className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="bg-[var(--primary)] p-1.5 rounded-lg group-hover:bg-[#6d360e] dark:group-hover:bg-[#b45309] transition-colors text-white">
-              <Music size={24} />
+            <div className="relative w-10 h-10 overflow-hidden rounded-lg">
+              <Image 
+                src="/logo.png" 
+                alt={t.navbar.title} 
+                fill 
+                className="object-cover"
+              />
             </div>
             <span className="text-xl font-bold tracking-tight text-[var(--foreground)] font-serif">
-              Violin Studio
+              {t.navbar.title}
             </span>
           </Link>
 
@@ -62,16 +72,18 @@ export function Navbar() {
               ))}
             </ul>
             <div className="flex items-center gap-4">
+               <LanguageToggle />
                <ThemeToggle />
                <Link href="/login" className="text-sm font-medium text-[var(--muted)] hover:text-[var(--foreground)] transition-colors">
-                  Log in
+                  {t.navbar.login}
                </Link>
-               <Button size="sm">Get Started</Button>
+               <Button size="sm">{t.navbar.getStarted}</Button>
             </div>
           </div>
 
           {/* Mobile Toggle */}
           <div className="flex md:hidden items-center gap-4">
+            <LanguageToggle />
             <ThemeToggle />
             <button
               className="text-[var(--foreground)]"
@@ -83,37 +95,36 @@ export function Navbar() {
         </nav>
       </div>
 
-      {/* Mobile Nav */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[var(--background)] border-b border-[var(--border)] overflow-hidden"
-          >
-            <ul className="flex flex-col p-4 gap-4">
-              {navLinks.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className="block text-base font-medium text-[var(--foreground)] hover:text-[var(--primary)]"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-               <li className="pt-2 border-t border-[var(--border)] flex flex-col gap-3">
-                  <Link href="/login" onClick={() => setIsOpen(false)} className="text-base font-medium text-[var(--foreground)]">
-                    Log in
-                  </Link>
-                  <Button className="w-full">Get Started</Button>
-               </li>
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
-  );
+                {/* Mobile Nav */}
+            <AnimatePresence>
+              {isOpen && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="md:hidden bg-[var(--background)] border-b border-[var(--border)] overflow-hidden"
+                >
+                  <ul className="flex flex-col p-4 gap-4">
+                    {navLinks.map((link) => (
+                      <li key={link.name}>
+                        <Link
+                          href={link.href}
+                          onClick={() => setIsOpen(false)}
+                          className="block text-base font-medium text-[var(--foreground)] hover:text-[var(--primary)]"
+                        >
+                          {link.name}
+                        </Link>
+                      </li>
+                    ))}
+                     <li className="pt-2 border-t border-[var(--border)] flex flex-col gap-3">
+                        <Link href="/login" onClick={() => setIsOpen(false)} className="text-base font-medium text-[var(--foreground)]">
+                          {t.navbar.login}
+                        </Link>
+                        <Button className="w-full">{t.navbar.getStarted}</Button>
+                     </li>
+                  </ul>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </header>  );
 }

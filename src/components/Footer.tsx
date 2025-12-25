@@ -1,7 +1,13 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
-import { Music, Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import { useLanguage } from "@/context/language-context";
 
 export function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-[var(--background)] border-t border-[var(--border)]">
       <div className="container mx-auto px-4 md:px-6 py-12 md:py-16">
@@ -9,16 +15,20 @@ export function Footer() {
           
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="bg-[var(--primary)] p-1.5 rounded-lg text-white">
-                <Music size={20} />
+              <div className="relative w-8 h-8 overflow-hidden rounded-md">
+                <Image 
+                  src="/logo.png" 
+                  alt={t.navbar.title} 
+                  fill 
+                  className="object-cover"
+                />
               </div>
               <span className="text-xl font-bold text-[var(--foreground)] font-serif">
-                Violin Studio
+                {t.navbar.title}
               </span>
             </Link>
             <p className="text-[var(--muted)] max-w-sm mb-6">
-              Building the largest and most vibrant violin community in Bangladesh. 
-              Connecting hearts through strings.
+              {t.footer.description}
             </p>
             <div className="flex gap-4">
               <a href="#" className="text-[var(--muted)] hover:text-[var(--primary)] transition-colors"><Facebook size={20} /></a>
@@ -29,28 +39,28 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold text-[var(--foreground)] mb-4 font-serif">Platform</h4>
+            <h4 className="font-semibold text-[var(--foreground)] mb-4 font-serif">{t.footer.platform}</h4>
             <ul className="flex flex-col gap-3">
-              <li><Link href="#" className="text-[var(--muted)] hover:text-[var(--primary)] transition-colors">Community</Link></li>
-              <li><Link href="#" className="text-[var(--muted)] hover:text-[var(--primary)] transition-colors">Courses</Link></li>
-              <li><Link href="#" className="text-[var(--muted)] hover:text-[var(--primary)] transition-colors">Events</Link></li>
-              <li><Link href="#" className="text-[var(--muted)] hover:text-[var(--primary)] transition-colors">Blog</Link></li>
+              <li><Link href="#" className="text-[var(--muted)] hover:text-[var(--primary)] transition-colors">{t.footer.links.community}</Link></li>
+              <li><Link href="#" className="text-[var(--muted)] hover:text-[var(--primary)] transition-colors">{t.footer.links.courses}</Link></li>
+              <li><Link href="#" className="text-[var(--muted)] hover:text-[var(--primary)] transition-colors">{t.footer.links.events}</Link></li>
+              <li><Link href="#" className="text-[var(--muted)] hover:text-[var(--primary)] transition-colors">{t.footer.links.blog}</Link></li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-semibold text-[var(--foreground)] mb-4 font-serif">Support</h4>
+            <h4 className="font-semibold text-[var(--foreground)] mb-4 font-serif">{t.footer.support}</h4>
             <ul className="flex flex-col gap-3">
-              <li><Link href="#" className="text-[var(--muted)] hover:text-[var(--primary)] transition-colors">Contact Us</Link></li>
-              <li><Link href="#" className="text-[var(--muted)] hover:text-[var(--primary)] transition-colors">FAQ</Link></li>
-              <li><Link href="#" className="text-[var(--muted)] hover:text-[var(--primary)] transition-colors">Terms of Service</Link></li>
-              <li><Link href="#" className="text-[var(--muted)] hover:text-[var(--primary)] transition-colors">Privacy Policy</Link></li>
+              <li><Link href="#" className="text-[var(--muted)] hover:text-[var(--primary)] transition-colors">{t.footer.links.contact}</Link></li>
+              <li><Link href="#" className="text-[var(--muted)] hover:text-[var(--primary)] transition-colors">{t.footer.links.faq}</Link></li>
+              <li><Link href="#" className="text-[var(--muted)] hover:text-[var(--primary)] transition-colors">{t.footer.links.terms}</Link></li>
+              <li><Link href="#" className="text-[var(--muted)] hover:text-[var(--primary)] transition-colors">{t.footer.links.privacy}</Link></li>
             </ul>
           </div>
         </div>
 
         <div className="mt-12 pt-8 border-t border-[var(--border)] text-center text-[var(--muted)] text-sm">
-          © {new Date().getFullYear()} Violin Studio. All rights reserved.
+          © {new Date().getFullYear()} {t.footer.copyright}
         </div>
       </div>
     </footer>
