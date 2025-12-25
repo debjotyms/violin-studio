@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Button } from "./ui/button";
 import { ArrowRight, PlayCircle } from "lucide-react";
 
@@ -73,23 +74,18 @@ export function Hero() {
             className="flex-1 w-full relative"
           >
              <div className="relative aspect-square md:aspect-[4/3] rounded-2xl bg-[var(--background)] border border-[var(--border)] overflow-hidden shadow-2xl">
-                {/* Abstract decorative elements simulating wood grain/varnish */}
-                <div className="absolute inset-0 bg-gradient-to-br from-[var(--background)] to-[var(--accent)]" />
-                
-                {/* Stylized F-hole shape (abstracted) */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-64 border-l-4 border-[var(--primary)]/20 rounded-[50%] skew-y-12 blur-sm" />
-                <div className="absolute top-1/2 left-1/2 translate-x-8 -translate-y-1/2 w-32 h-64 border-r-4 border-[var(--primary)]/20 rounded-[50%] -skew-y-12 blur-sm" />
-
-                {/* Simulated Grid/UI elements - warmer tones */}
-                <div className="absolute top-6 left-6 right-6 bottom-6 border-2 border-dashed border-[var(--border)] rounded-xl flex items-center justify-center">
-                    <div className="text-[var(--primary)] font-serif font-bold text-9xl select-none opacity-10 italic">
-                        VS
-                    </div>
-                </div>
-
-                <div className="absolute -bottom-12 -right-12 w-64 h-64 bg-[var(--secondary)]/10 rounded-full blur-2xl" />
-                <div className="absolute -top-12 -left-12 w-64 h-64 bg-[var(--primary)]/10 rounded-full blur-2xl" />
-             </div>
+                                <Image 
+                                  src="/violin-hero.webp" 
+                                  alt="Violinist playing" 
+                                  fill 
+                                  className="object-cover"
+                                  priority
+                                />
+                                
+                                                {/* Overlay UI elements */}
+                                                <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)]/20 to-transparent" />
+                                                
+                                                <div className="absolute top-6 left-6 right-6 bottom-6 border-2 border-dashed border-white/20 rounded-xl" />             </div>
              
              {/* Floating Badge */}
              <motion.div 
