@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+:root {
+  /* Light Mode - Warm Sheet Music */
+  --background: #fdfbf7;
+  --foreground: #2a2118;
+  --primary: #8B4513; 
+  --primary-foreground: #ffffff;
+  --secondary: #d97706; 
+  --secondary-foreground: #ffffff;
+  --accent: #f5e6d3; 
+  --muted: #786c60; 
+  --border: #e6d0b3;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark Mode - Dark Ebony/Rosewood */
+    --background: #1c1917; /* Very dark warm grey/brown */
+    --foreground: #f5e6d3; /* Parchment white */
+    --primary: #d97706; /* Golden Amber (pops better on dark) */
+    --primary-foreground: #ffffff;
+    --secondary: #8B4513; /* Deep Brown */
+    --secondary-foreground: #ffffff;
+    --accent: #292524; /* Darker wood tone */
+    --muted: #a8a29e; /* Warm grey */
+    --border: #44403c; /* Dark warm border */
+  }
+}
+
+/* Force class-based dark mode for next-themes */
+.dark {
+  --background: #1c1917;
+  --foreground: #f5e6d3;
+  --primary: #d97706;
+  --primary-foreground: #ffffff;
+  --secondary: #8B4513;
+  --secondary-foreground: #ffffff;
+  --accent: #292524;
+  --muted: #a8a29e;
+  --border: #44403c;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+}
