@@ -8,10 +8,48 @@ import { ArrowRight, PlayCircle } from "lucide-react";
 export function Hero() {
   return (
     <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-[var(--background)]">
-      {/* Background blobs - Warm tones */}
+      {/* Background blobs - Warm tones with animation */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl -z-10 pointer-events-none">
-        <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-[var(--secondary)]/10 rounded-full blur-3xl mix-blend-multiply dark:mix-blend-screen dark:bg-[var(--secondary)]/20" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[var(--primary)]/10 rounded-full blur-3xl mix-blend-multiply dark:mix-blend-screen dark:bg-[var(--primary)]/20" />
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3],
+            rotate: [0, 90, 0]
+          }}
+          transition={{ 
+            duration: 15, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
+          className="absolute top-0 right-[-10%] w-[600px] h-[600px] bg-[var(--secondary)]/20 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen dark:bg-[var(--secondary)]/30" 
+        />
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.3, 1],
+            opacity: [0.3, 0.6, 0.3],
+            x: [0, 50, 0]
+          }}
+          transition={{ 
+            duration: 20, 
+            repeat: Infinity, 
+            ease: "easeInOut",
+            delay: 2
+          }}
+          className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-[var(--primary)]/20 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen dark:bg-[var(--primary)]/30" 
+        />
+        <motion.div 
+          animate={{ 
+            scale: [1, 1.1, 1],
+            opacity: [0.2, 0.4, 0.2],
+          }}
+          transition={{ 
+            duration: 12, 
+            repeat: Infinity, 
+            ease: "easeInOut",
+            delay: 5
+          }}
+          className="absolute top-[40%] left-[20%] w-[300px] h-[300px] bg-[#d97706]/20 rounded-full blur-[80px] mix-blend-multiply dark:mix-blend-screen dark:bg-[#d97706]/20" 
+        />
       </div>
 
       <div className="container mx-auto px-4 md:px-6">
